@@ -4,7 +4,7 @@ import java.util.*
 
 // "yyyy-MM-dd" or "dd-MM-yyyy" --> "dd.MM.yyyy"
 fun String.format(): String {
-    if (this.isBlank()) return this
+    if (this.isBlank()) return "-"
 
     val (year, month, day) = this.getOptions()
 
@@ -13,7 +13,7 @@ fun String.format(): String {
 
 // "yyyy-MM-dd" or "dd-MM-yyyy"
 fun String.toAge(): String {
-    if (this.isBlank()) return this
+    if (this.isBlank()) return "-"
 
     val (year, month, day) = this.getOptions()
 

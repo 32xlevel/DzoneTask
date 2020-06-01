@@ -10,6 +10,10 @@ open class BaseViewModel : ViewModel() {
     val uiState: LiveData<UiState>
         get() = _uiState
 
+    init {
+        updateUiState(UiState.LOADING)
+    }
+
     @UiThread
     fun updateUiState(state: UiState) {
         _uiState.value = state

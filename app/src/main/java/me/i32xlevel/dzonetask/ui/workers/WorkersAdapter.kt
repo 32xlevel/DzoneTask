@@ -7,13 +7,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions.circleCropTransform
 import kotlinx.android.synthetic.main.item_worker.view.*
 import me.i32xlevel.dzonetask.R
 import me.i32xlevel.dzonetask.extensions.bindAvatar
 import me.i32xlevel.dzonetask.extensions.toAge
 import me.i32xlevel.dzonetask.model.Worker
+import java.util.*
 
 class WorkersAdapter(
     private val clickListener: (Worker) -> Unit
@@ -32,15 +31,15 @@ class WorkersAdapter(
 class WorkerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(worker: Worker, clickListener: (Worker) -> Unit) {
         // name
-        itemView.worker_name.text = "Имя: ${worker.firstName.toLowerCase().capitalize()}"
-        itemView.worker_lastname.text = "Фамилия: ${worker.lastName.toLowerCase().capitalize()}"
+        itemView.worker_name.text = itemView.context.getString(R.string.worker_name, worker.firstName.toLowerCase(Locale.ROOT).capitalize())
+        itemView.worker_lastname.text = itemView.context.getString(R.string.worker_age, worker.lastName.toLowerCase(Locale.ROOT).capitalize())
 
         // age
-        val age: String = worker.birthday?.toAge() ?: ""
-        if (age.isBlank()) itemView.worker_age.isVisible = false
+        val age: String = worker.birthday?.toAge() ?: "-"
+        if (age.isBlank() || age == "-") itemView.worker_age.isVisible = false
         else {
             itemView.worker_age.isVisible = true
-            itemView.worker_age.text = "Возраст: $age"
+            itemView.worker_age.text = itemView.context.getString(R.string.worker_age, age)
         }
 
         // avatar

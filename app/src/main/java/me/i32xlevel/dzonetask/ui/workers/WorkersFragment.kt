@@ -1,11 +1,13 @@
 package me.i32xlevel.dzonetask.ui.workers
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
+import kotlinx.android.synthetic.main.notify_layout.*
 import kotlinx.android.synthetic.main.workers_fragment.*
 import me.i32xlevel.dzonetask.R
 import me.i32xlevel.dzonetask.model.database.DzoneDatabase
@@ -29,10 +31,12 @@ class WorkersFragment : BaseFragment<WorkersViewModel>(R.layout.workers_fragment
     }
 
     override fun setupViews() {
-        (activity as AppCompatActivity).supportActionBar?.title = "Профессия: ${args.profession.name}"
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.worker_profession, args.profession.name)
 
         workers_recycler.adapter = adapter
         workers_recycler.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+
+        notify_button.setOnClickListener { viewModel.getDataFromDb() }
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
@@ -43,14 +47,18 @@ class WorkersFragment : BaseFragment<WorkersViewModel>(R.layout.workers_fragment
         when (uiState) {
             UiState.LOADING -> ProgressDialog.show(requireContext())
             UiState.EMPTY, UiState.ERROR -> {
-
-            }
-            UiState.SUCCESS -> {
-
+                notify_text.isVisible = true
+                notify_button.isVisible = true
+                workers_recycler.isVisible = false
             }
         }
 
         if (uiState != UiState.LOADING) ProgressDialog.dismiss()
+        if (uiState != UiState.EMPTY && uiState != UiState.ERROR) {
+            notify_text.isVisible = false
+            notify_button.isVisible = false
+            workers_recycler.isVisible = true
+        }
     }
 
 }

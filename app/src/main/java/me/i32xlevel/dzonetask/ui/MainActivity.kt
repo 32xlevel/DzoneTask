@@ -1,10 +1,11 @@
-package me.i32xlevel.dzonetask
+package me.i32xlevel.dzonetask.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import me.i32xlevel.dzonetask.R
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController

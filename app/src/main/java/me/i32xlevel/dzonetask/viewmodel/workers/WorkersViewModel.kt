@@ -12,6 +12,9 @@ import me.i32xlevel.dzonetask.model.database.WorkerDao
 import me.i32xlevel.dzonetask.viewmodel.BaseViewModel
 import me.i32xlevel.dzonetask.viewmodel.UiState
 
+/**
+ * DI needs to be improved by some framework :)
+ */
 class WorkersViewModel(
     private val workerDao: WorkerDao,
     private val professionId: Int
@@ -21,8 +24,10 @@ class WorkersViewModel(
         get() = _data
 
     init {
-        updateUiState(UiState.LOADING)
+        getDataFromDb()
+    }
 
+    fun getDataFromDb() {
         viewModelScope.launch {
             try {
                 val workers = workerDao
@@ -44,8 +49,6 @@ class WorkersViewModel(
                 withContext(Dispatchers.Main) {
                     updateUiState(UiState.ERROR)
                 }
-
-                e.printStackTrace()
             }
         }
     }

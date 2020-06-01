@@ -1,7 +1,9 @@
 package me.i32xlevel.dzonetask.ui
 
+import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.worker_fragment.*
 import me.i32xlevel.dzonetask.R
@@ -10,38 +12,33 @@ import me.i32xlevel.dzonetask.extensions.format
 import me.i32xlevel.dzonetask.extensions.toAge
 import me.i32xlevel.dzonetask.model.Profession
 import me.i32xlevel.dzonetask.model.Worker
-import me.i32xlevel.dzonetask.viewmodel.UiState
-import me.i32xlevel.dzonetask.viewmodel.WorkerViewModel
+import java.util.*
 
-class WorkerFragment : BaseFragment<WorkerViewModel>(R.layout.worker_fragment) {
+class WorkerFragment : Fragment(R.layout.worker_fragment) {
 
-    override val viewModel: WorkerViewModel by viewModels()
     private val args: WorkerFragmentArgs by navArgs()
 
-    override fun setupViews() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         bindData(args.worker, args.professions)
     }
 
-    override fun observeUiState(uiState: UiState) {
-
-    }
-
     private fun bindData(worker: Worker, professions: Array<Profession>) {
-        val name = worker.firstName.toLowerCase().capitalize()
-        val lastName = worker.lastName.toLowerCase().capitalize()
+        val name = worker.firstName.toLowerCase(Locale.ROOT).capitalize()
+        val lastName = worker.lastName.toLowerCase(Locale.ROOT).capitalize()
         val age = worker.birthday?.toAge() ?: "-"
         val birthday = worker.birthday?.format() ?: "-"
 
+        // For some reasons joinToString does not work
         var profession = ""
         professions.forEach { profession += "${it.name}, " }
         profession = profession.substring(0, profession.lastIndexOf(','))
 
-        (activity as AppCompatActivity).supportActionBar?.title = "$name $lastName"
-        worker_name.text = "Имя: $name"
-        worker_lastname.text = "Фамилия: $lastName"
-        worker_age.text = "Возраст: $age"
-        worker_birthday.text = "Дата рождения: $birthday"
-        worker_profession.text = "Профессия: $profession"
+        worker_name.text = getString(R.string.worker_name, name)
+        worker_lastname.text = getString(R.string.worker_lastname, lastName)
+        worker_age.text = getString(R.string.worker_age, age)
+        worker_birthday.text = getString(R.string.worker_birthday, birthday)
+        worker_profession.text = getString(R.string.worker_profession, profession)
         worker_avatar.bindAvatar(worker.avatarUrl)
 
         (activity as AppCompatActivity).supportActionBar?.title = "$name $lastName"

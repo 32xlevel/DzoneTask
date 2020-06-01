@@ -20,8 +20,7 @@ abstract class DzoneDatabase : RoomDatabase() {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room
-                        .databaseBuilder(context.applicationContext, DzoneDatabase::class.java, "dzone")
-                        .fallbackToDestructiveMigration()
+                        .databaseBuilder(context.applicationContext, DzoneDatabase::class.java, "dzone.db")
                         .build()
                 }
 

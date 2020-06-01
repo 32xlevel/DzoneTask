@@ -14,6 +14,9 @@ import me.i32xlevel.dzonetask.model.remote.WorkersAPI
 import me.i32xlevel.dzonetask.viewmodel.BaseViewModel
 import me.i32xlevel.dzonetask.viewmodel.UiState
 
+/**
+ * DI needs to be improved by some framework :)
+ */
 class ProfessionsViewModel(
     private val workersAPI: WorkersAPI,
     private val professionsDao: ProfessionDao,
@@ -24,8 +27,6 @@ class ProfessionsViewModel(
         get() = _data
 
     init {
-        updateUiState(UiState.LOADING)
-
         viewModelScope.launch {
             val professions = getProfessionsFromDb()
             if (professions.isEmpty()) {
@@ -35,8 +36,6 @@ class ProfessionsViewModel(
                     withContext(Dispatchers.Main) {
                         updateUiState(UiState.ERROR)
                     }
-
-                    e.printStackTrace()
                 }
             } else {
                 _data.postValue(professions.toProfession())
@@ -66,7 +65,7 @@ class ProfessionsViewModel(
         insertRemoteDataToDb(remoteResponse)
 
         val finalProfessions = professionsDao.getAll().toProfession()
-        _data.postValue(finalProfessions) // TODO: Излишняя работа!
+        _data.postValue(finalProfessions)
 
         withContext(Dispatchers.Main) {
             if (finalProfessions.isEmpty()) updateUiState(UiState.EMPTY)
