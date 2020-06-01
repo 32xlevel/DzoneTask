@@ -25,7 +25,10 @@ class WorkersViewModel(
 
         viewModelScope.launch {
             try {
-                val workers = workerDao.getWithProfessions(professionId).toWorker()
+                val workers = workerDao
+                    .getAllWithProfessions()
+                    .filter { worker -> worker.professions.any { profession -> profession.professionId == professionId } }
+                    .toWorker()
 
                 if (workers.isNotEmpty()) {
                     _data.postValue(workers)

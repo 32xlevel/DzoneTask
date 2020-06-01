@@ -7,7 +7,10 @@ interface WorkerDao {
     @Insert
     suspend fun insert(worker: WorkerTable)
 
+    @Insert
+    suspend fun insertWorkerAndProfession(kek: WorkersProfessionsCrossRef)
+
     @Transaction
-    @Query("SELECT * FROM workers, professions WHERE professionId = :professionId")
-    suspend fun getWithProfessions(professionId: Int): List<WorkerWithProfessions>
+    @Query("SELECT * FROM workers")
+    suspend fun getAllWithProfessions(): List<WorkerWithProfessions>
 }

@@ -26,10 +26,8 @@ data class WorkerTable(
  */
 @Entity(primaryKeys = ["professionId", "workerId"])
 data class WorkersProfessionsCrossRef(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
     val professionId: Int,
-    val workerId: Int
+    val workerId: String
 )
 
 data class WorkerWithProfessions(
