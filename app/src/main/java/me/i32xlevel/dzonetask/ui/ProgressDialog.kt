@@ -11,14 +11,12 @@ object ProgressDialog {
         dialog?.show() ?: run {
             dialog = AlertDialog.Builder(context)
                 .setCancelable(false)
-                .setTitle("Загрузка данных")
                 .setView(R.layout.progress_dialog)
                 .create()
             dialog?.show()
         }
     }
 
-    // TODO: @OnLifecycleEvent(ON_STOP) ???
     fun dismiss() {
         dialog?.dismiss()
     }
