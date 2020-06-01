@@ -15,3 +15,6 @@
 <a href="https://ibb.co/Bfwt0Jt"><img src="https://i.ibb.co/cyx1491/Screenshot-18.png" alt="Screenshot-18" border="0"></a>  
 ---
 Приложение старается максимально ограничить походы в сеть, сделав это только при первом запуске приложения.  
+
+---
+APK файл можно скачать по ссылке: https://yadi.sk/d/W0C6g9_-zDxiVA
