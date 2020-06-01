@@ -43,7 +43,7 @@
             android:name="worker"
             app:argType="me.i32xlevel.dzonetask.model.Worker" />
         <argument
-            android:name="profession"
-            app:argType="me.i32xlevel.dzonetask.model.Profession" />
+            android:name="professions"
+            app:argType="me.i32xlevel.dzonetask.model.Profession[]" />
     </fragment>
 </navigation>

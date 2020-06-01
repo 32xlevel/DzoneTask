@@ -24,7 +24,7 @@ class WorkersFragment : BaseFragment<WorkersViewModel>(R.layout.workers_fragment
     private val args: WorkersFragmentArgs by navArgs()
     private val adapter: WorkersAdapter by lazy {
         WorkersAdapter { worker ->
-            findNavController().navigate(WorkersFragmentDirections.actionWorkersFragmentToWorkerFragment(worker, args.profession))
+            findNavController().navigate(WorkersFragmentDirections.actionWorkersFragmentToWorkerFragment(worker, worker.professions.toTypedArray()))
         }
     }
 

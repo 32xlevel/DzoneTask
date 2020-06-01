@@ -8,6 +8,8 @@ import me.i32xlevel.dzonetask.R
 import me.i32xlevel.dzonetask.extensions.bindAvatar
 import me.i32xlevel.dzonetask.extensions.format
 import me.i32xlevel.dzonetask.extensions.toAge
+import me.i32xlevel.dzonetask.model.Profession
+import me.i32xlevel.dzonetask.model.Worker
 import me.i32xlevel.dzonetask.viewmodel.UiState
 import me.i32xlevel.dzonetask.viewmodel.WorkerViewModel
 
@@ -17,12 +19,22 @@ class WorkerFragment : BaseFragment<WorkerViewModel>(R.layout.worker_fragment) {
     private val args: WorkerFragmentArgs by navArgs()
 
     override fun setupViews() {
-        val worker = args.worker
+        bindData(args.worker, args.professions)
+    }
+
+    override fun observeUiState(uiState: UiState) {
+
+    }
+
+    private fun bindData(worker: Worker, professions: Array<Profession>) {
         val name = worker.firstName.toLowerCase().capitalize()
         val lastName = worker.lastName.toLowerCase().capitalize()
         val age = worker.birthday?.toAge() ?: "-"
         val birthday = worker.birthday?.format() ?: "-"
-        val profession = args.profession.name
+
+        var profession = ""
+        professions.forEach { profession += "${it.name}, " }
+        profession = profession.substring(0, profession.lastIndexOf(','))
 
         (activity as AppCompatActivity).supportActionBar?.title = "$name $lastName"
         worker_name.text = "Имя: $name"
@@ -31,9 +43,7 @@ class WorkerFragment : BaseFragment<WorkerViewModel>(R.layout.worker_fragment) {
         worker_birthday.text = "Дата рождения: $birthday"
         worker_profession.text = "Профессия: $profession"
         worker_avatar.bindAvatar(worker.avatarUrl)
-    }
 
-    override fun observeUiState(uiState: UiState) {
-
+        (activity as AppCompatActivity).supportActionBar?.title = "$name $lastName"
     }
 }
