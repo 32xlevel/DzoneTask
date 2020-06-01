@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/professionsFragment">
+
+    <fragment
+        android:id="@+id/professionsFragment"
+        android:name="me.i32xlevel.dzonetask.ui.professions.ProfessionsFragment"
+        android:label="@string/professions_label"
+        tools:layout="@layout/professions_fragment" >
+        <action
+            android:id="@+id/action_professionsFragment_to_workersFragment"
+            app:destination="@id/workersFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/workersFragment"
+        android:name="me.i32xlevel.dzonetask.ui.workers.WorkersFragment"
+        android:label="Workers"
+        tools:layout="@layout/workers_fragment" >
+        <action
+            android:id="@+id/action_workersFragment_to_workerFragment"
+            app:destination="@id/workerFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <argument
+            android:name="profession"
+            app:argType="me.i32xlevel.dzonetask.model.Profession" />
+    </fragment>
+    <fragment
+        android:id="@+id/workerFragment"
+        android:name="me.i32xlevel.dzonetask.ui.WorkerFragment"
+        android:label="Worker"
+        tools:layout="@layout/worker_fragment" >
+        <argument
+            android:name="worker"
+            app:argType="me.i32xlevel.dzonetask.model.Worker" />
+        <argument
+            android:name="profession"
+            app:argType="me.i32xlevel.dzonetask.model.Profession" />
+    </fragment>
+</navigation>

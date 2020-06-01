@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">DzoneTask</string>
+    <string name="notify_button">Обновить страницу</string>
+    <string name="notify_text">Данные не были получены :(\nПопробуйте обновить страницу</string>
+    <string name="professions_label">Список профессий</string>
+</resources>

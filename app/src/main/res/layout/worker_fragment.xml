@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".ui.WorkerFragment">
+
+        <ImageView
+            android:id="@+id/worker_avatar"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center"
+            tools:ignore="ContentDescription"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/worker_name"
+            style="@style/WorkerCharacteristicTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Имя: Артур" />
+
+        <TextView
+            android:id="@+id/worker_lastname"
+            style="@style/WorkerCharacteristicTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Фамилия: Илькаев" />
+
+        <TextView
+            android:id="@+id/worker_profession"
+            style="@style/WorkerCharacteristicTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Профессия: Android developer" />
+
+        <TextView
+            android:id="@+id/worker_birthday"
+            style="@style/WorkerCharacteristicTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Дата рождения: 28.01.2001" />
+
+        <TextView
+            android:id="@+id/worker_age"
+            style="@style/WorkerCharacteristicTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Возраст: 19" />
+    </LinearLayout>
+</ScrollView>
