@@ -8,7 +8,7 @@ interface WorkerDao {
     suspend fun insert(worker: WorkerTable)
 
     @Insert
-    suspend fun insertWorkerAndProfession(kek: WorkersProfessionsCrossRef)
+    suspend fun insertWorkerAndProfession(workersProfessionsCrossRef: WorkersProfessionsCrossRef)
 
     @Transaction
     @Query("SELECT * FROM workers")
